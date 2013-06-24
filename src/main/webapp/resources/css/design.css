@@ -1,0 +1,43 @@
+.wrap{
+    margin-top: 50px;
+}
+.content{
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    
+    font-family: Georgia;
+    color: #fff;
+    
+    box-shadow: 10px 10px 10px #000;
+}
+
+.outputLabel {
+    float: left;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+}
+.form{
+    padding-top : 10px; 
+}
+.wrapForm {
+    margin: auto;
+    width: 330px;
+}
+
+.titre {
+    text-align: center;
+}
+#wrapFormSignUp {
+    display: none;
+}
+
+#contentSignIn {
+    background: #9b59b6;
+}
+
+#contentSignUp {
+    background: #e67e22;
+}
+
