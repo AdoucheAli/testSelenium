@@ -1,20 +1,34 @@
 $(document).ready(function(){
-    alert($("#erreurSaisie").css("height"));
-    if( $("#erreurSaisie").css("height") == "0px") {
+
+     if ($("#erreurSaisieSignUp").css("height") != null && $("#erreurSaisieSignUp").css("height") > "0px") {
+         //$("#wrapFormSignUp").css("display","block");
+         alert("ali");
+     }
+
+     if( $("#erreurSaisieSignIn").css("height") == "0px") {
      $("#volet").css("top","-" + $("#volet").css("height") );
     }
+    
+    
+//    if( $("#erreurSaisieSignUp").css("height") > "0px") {
+//        $("#wrapFormSignIn").css("display","none");
+//        $("#wrapFormSignUp").css("display","block");
+//    } else if ($("#erreurSaisieSignIn").css("height") > "0px"){
+//        $("#wrapFormSignUp").css("display","none");
+//        $("#wrapFormSignIn").css("display","block");
+//    }
 });
 
 $(function(){
 
     $("#btnSignUp").click(function(){
+        $("#erreurSaisieSignUp").css("display","none");
         $("#wrapFormSignIn").effect("drop", 900, 
             function(){ 
                 $("#wrapFormSignUp").fadeIn(700,  
                 function(){
                      $("#ouvrir").css("border-color","#e67e22");
                      $("#ouvrir").css("background","#d35400");
-                     $("#erreurSaisie").css("display","none");
                 });
             });
             
