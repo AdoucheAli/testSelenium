@@ -1,8 +1,17 @@
 package fr.ali.jsf;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import javax.enterprise.inject.Model;
+import javax.inject.Inject;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -13,6 +22,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Model
 public class Index {
     
+    @Inject
+    Validator validator;
+   
     @NotEmpty(message = "veuillez rentrer un nom")
     private String nom;
     
@@ -27,6 +39,7 @@ public class Index {
     @Email(message = "veuillez rentrer un email valide")
     private String email;
 
+    
     public String getNom() {
         return nom;
     }
@@ -60,7 +73,18 @@ public class Index {
     }
     
     public String signIn(){
-        return "hello.xhtml";
+
+        List<String> passwordAndEmail = Arrays.asList(password, email);
+        Set<ConstraintViolation<List<String>>> constraintViolations = validator.validate(passwordAndEmail);
+        String goTo;
+        if (constraintViolations.size() > 0) {
+            goTo = "formulaire.xhtml";
+        } else {
+            goTo = "bienvenue.xhtml";
+        }
+        return goTo;
+        
+        
     }
     
     public String signUp(){

@@ -19,5 +19,13 @@ $(function(){
         }
         
     });
+    
+    $("#submitSignIn").click(function(){
+        $("#volet").css("top","10px");
+    });
+    
+    $("#submitSignUp").click(function(){
+        $("#volet").css("top","10px");
+    });
 });
 
