@@ -29,7 +29,7 @@
                                 <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
                             </h:outputLabel>
                             <h:commandButton type = "submit" class="btn btn-large btn-block  btn-success" value="Sign in" action = "#{index.signIn}" actionListener="#{index.listenerSignIn()}" id = "submitSignIn"/>
-                            <h:inputHidden id = "isSubmittedSignIn" value="#{index.isSubmittedSignIn}"/>
+                            <h:inputHidden id = "isSubmittedSignIn"/>
                         </h:form>
                         <h:outputText class="btn btn-large btn-block  btn-primary" value="Sign up for free" id = "btnSignUp"/>
                     </div>
@@ -55,7 +55,7 @@
                                 <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
                             </h:outputLabel>
                             <h:commandButton class="btn btn-large btn-block  btn-success" value="Sign up" action = "#{index.signUp}" actionListener="#{index.listenerSignUp()}" id = "submitSignUp"/>
-                            <h:inputHidden id = "isSubmittedSignUp" value="#{index.isSubmittedSignUp}"/>
+                            <h:inputHidden id = "isSubmittedSignUp"/>
                         </h:form>
                         <h:outputText class="btn btn-large btn-block  btn-primary" value="go to Sign in" id = "btnSignIn"/>
                     </div>
