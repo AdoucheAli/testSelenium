@@ -1,25 +1,17 @@
 $(document).ready(function(){
 
-    //     if ($("#erreurSaisieSignUp").css("height") != null && $("#erreurSaisieSignUp").css("height") > "0px") {
-    //         //$("#wrapFormSignUp").css("display","block");
-    //         alert("ali");
-    //     }
-
+    $("#wrapFormSignUp").css("display","none");
     if( $("#erreurSaisieSignIn").css("height") == "0px") {
         $("#volet").css("top","-" + $("#volet").css("height") );
     }
     if ( $("#isSubmittedSignIn").attr("value") != null && $("#isSubmittedSignIn").attr("value") == "true"){
-        $("#isSubmittedSignUp").attr("value","false");
-        $("#wrapFormSignUp").css("display","none");
         $("#wrapFormSignIn").css("display","block");
+        $("#wrapFormSignUp").css("display","none");
     }
     if ( $("#isSubmittedSignUp").attr("value") != null && $("#isSubmittedSignUp").attr("value") == "true"){
-        $("#isSubmittedSignIn").attr("value","false");
         $("#wrapFormSignUp").css("display","block");
         $("#wrapFormSignIn").css("display","none");
     }
-     
-
 });
 
 $(function(){
@@ -34,8 +26,7 @@ $(function(){
                         $("#ouvrir").css("background","#d35400");
                     });
             });
-            
-        
+        $("#isSubmittedSignIn").attr("value", "false");
     });
  
     
@@ -48,7 +39,7 @@ $(function(){
                         $("#ouvrir").css("background","#8e44ad");
                     });
             });
-       
+            $("#isSubmittedSignUp").attr("value", "false");
     });
     
     $("#ouvrir").click(function(){ 
