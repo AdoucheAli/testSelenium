@@ -84,10 +84,14 @@ public class Index implements Serializable {
     public void listenerSignIn() {
         isSubmittedSignIn = true;
         isSubmittedSignUp = false;
+        System.out.println("isSubmittedSignIn : " + isSubmittedSignIn);
+        System.out.println("isSubmittedSignUp : " + isSubmittedSignUp);
     }
     public void listenerSignUp() {
         isSubmittedSignUp = true;
         isSubmittedSignIn = false;
+        System.out.println("isSubmittedSignIn : " + isSubmittedSignIn);
+        System.out.println("isSubmittedSignUp : " + isSubmittedSignUp);
     }
     public String signIn(){
         return "signInSuccess.xhtml";   
