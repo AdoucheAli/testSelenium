@@ -1,6 +1,8 @@
 package fr.ali.jsf;
 
-import javax.enterprise.inject.Model;
+import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
@@ -10,8 +12,9 @@ import org.hibernate.validator.constraints.NotEmpty;
  *
  * @author Adouche Ali
  */
-@Model
-public class Index {
+@Named
+@SessionScoped
+public class Index implements Serializable {
     
     @NotEmpty(message = "veuillez rentrer un nom")
     private String nom;
