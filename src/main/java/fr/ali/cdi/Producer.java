@@ -16,7 +16,7 @@ import org.hibernate.validator.HibernateValidator;
 @Singleton
 public class Producer {
     
-    @Produces
+    @Produces @Validateur
     public Validator getValidator() {
         ValidatorFactory factory = Validation.byProvider(HibernateValidator.class).
                 configure().buildValidatorFactory();

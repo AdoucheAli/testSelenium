@@ -1,17 +1,15 @@
 package fr.ali.jsf;
 
-import java.util.Arrays;
-import java.util.List;
+import fr.ali.cdi.Validateur;
+import java.util.Iterator;
 import java.util.Set;
 import javax.enterprise.inject.Model;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -22,7 +20,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Model
 public class Index {
     
-    @Inject
+    @Inject @Validateur
     Validator validator;
    
     @NotEmpty(message = "veuillez rentrer un nom")
@@ -39,6 +37,7 @@ public class Index {
     @Email(message = "veuillez rentrer un email valide")
     private String email;
 
+    private boolean isPasswordOrEmailError = false;
     
     public String getNom() {
         return nom;
@@ -72,12 +71,26 @@ public class Index {
         this.password = password;
     }
     
-    public String signIn(){
+    public void listener() {
+        Set<ConstraintViolation<Index>> constraintViolations = validator.validate(this);
+        System.out.println(email + " " + password);
+        System.out.println("**********************************************************");
+        
+        for (Iterator<ConstraintViolation<Index>> it = constraintViolations.iterator(); it.hasNext();) {
+            ConstraintViolation<Index> contraintes = it.next();
 
-        List<String> passwordAndEmail = Arrays.asList(password, email);
-        Set<ConstraintViolation<List<String>>> constraintViolations = validator.validate(passwordAndEmail);
+            System.out.println("propriete path " + contraintes.getPropertyPath().toString());
+            System.out.println("**********************************************************");
+            
+            if( "email".equals(contraintes.getPropertyPath().toString()) 
+                    || "password".equals(contraintes.getPropertyPath().toString()) ) {
+                isPasswordOrEmailError = true;
+            }
+        }
+    }
+    public String signIn(){
         String goTo;
-        if (constraintViolations.size() > 0) {
+        if (isPasswordOrEmailError) {
             goTo = "formulaire.xhtml";
         } else {
             goTo = "bienvenue.xhtml";

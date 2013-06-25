@@ -21,16 +21,14 @@
 
                     <div class = "wrapForm">
                         <h:form prependId="false" class = "form" id="formSignIn">
-                            <h:outputLabel class="outputLabel" for="inputNomSignIn">Nom</h:outputLabel>
-                            <h:inputText id="inputNomSignIn" value="#{index.nom}"></h:inputText>
-                            <h:outputLabel class="outputLabel" for="inputPasswordSignIn">Password</h:outputLabel>
-                            <h:inputSecret id="inputPasswordSignIn" value="#{index.password}"></h:inputSecret>
                             <h:outputLabel class="outputLabel" for="inputEmailSignIn">Email</h:outputLabel>
                             <h:inputText id="inputEmailSignIn" value = "#{index.email}"></h:inputText>
+                            <h:outputLabel class="outputLabel" for="inputPasswordSignIn">Password</h:outputLabel>
+                            <h:inputSecret id="inputPasswordSignIn" value="#{index.password}"></h:inputSecret>
                             <h:outputLabel class="checkbox">
                                 <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
                             </h:outputLabel>
-                            <h:commandButton class="btn btn-large btn-block  btn-success" value="Sign in" action = "#{index.signIn}" id = "submitSignIn"/>
+                            <h:commandButton type = "submit" class="btn btn-large btn-block  btn-success" value="Sign in" action = "#{index.signIn}" actionListener = "#{index.listener()}" id = "submitSignIn"/>
                         </h:form>
                         <h:outputText class="btn btn-large btn-block  btn-primary" value="Sign up for free" id = "btnSignUp"/>
                     </div>
