@@ -1,13 +1,6 @@
 package fr.ali.jsf;
 
-import fr.ali.cdi.Validateur;
-import java.util.Iterator;
-import java.util.Set;
 import javax.enterprise.inject.Model;
-import javax.faces.event.ActionEvent;
-import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
@@ -20,9 +13,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Model
 public class Index {
     
-    @Inject @Validateur
-    Validator validator;
-   
     @NotEmpty(message = "veuillez rentrer un nom")
     private String nom;
     
@@ -89,10 +79,12 @@ public class Index {
     }
     
     public void listenerSignIn() {
-
+        isSubmittedSignIn = true;
+        isSubmittedSignUp = false;
     }
     public void listenerSignUp() {
-
+        isSubmittedSignUp = true;
+        isSubmittedSignIn = false;
     }
     public String signIn(){
         return "signInSuccess.xhtml";   

@@ -1,10 +1,12 @@
 $(document).ready(function(){
 
-     if ($("#erreurSaisieSignUp").css("height") != null && $("#erreurSaisieSignUp").css("height") > "0px") {
-         //$("#wrapFormSignUp").css("display","block");
-         alert("ali");
-     }
+//     if ($("#erreurSaisieSignUp").css("height") != null && $("#erreurSaisieSignUp").css("height") > "0px") {
+//         //$("#wrapFormSignUp").css("display","block");
+//         alert("ali");
+//     }
 
+     alert($("#isSubmittedSignIn").attr("value"));
+     alert($("#isSubmittedSignUp").attr("value"));
      if( $("#erreurSaisieSignIn").css("height") == "0px") {
      $("#volet").css("top","-" + $("#volet").css("height") );
     }
