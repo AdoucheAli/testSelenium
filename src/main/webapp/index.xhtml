@@ -9,14 +9,14 @@
         <script src="./resources/js/jquery-1.9.1.min.js"></script>
         <script src="./resources/js/jquery-ui-1.10.0.custom.min.js"></script>
         <script src="./resources/js/fonctions.js"></script>
-
     </h:head>
     <h:body>
 
-        <div class = "row-fluid wrap" id="wrapFormSignIn">
+        <div id = "volet">
+            <div class = "row-fluid wrap" id="wrapFormSignIn">
 
-            <div class = "span4 offset4 content" id = "contentSignIn">
-                <h3 class = "titre">Sign In</h3><hr/>
+                <div class = "span4 offset4 content" id = "contentSignIn">
+                    <h3 class = "titre">Sign In</h3><hr/>
                     <h:messages class="alert alert-error" id = "erreurSaisie"/>
 
                     <div class = "wrapForm">
@@ -34,13 +34,13 @@
                         </h:form>
                         <h:outputText class="btn btn-large btn-block  btn-primary" value="Sign up for free" id = "btnSignUp"/>
                     </div>
+                </div>
             </div>
-        </div>
 
 
-        <div class = "row-fluid wrap" id="wrapFormSignUp">
-            <div class = "span4 offset4 content" id = "contentSignUp">
-                <h3 class = "titre" id = "titreSignUp">Sign Up</h3><hr/>
+            <div class = "row-fluid wrap" id="wrapFormSignUp">
+                <div class = "span4 offset4 content" id = "contentSignUp">
+                    <h3 class = "titre" id = "titreSignUp">Sign Up</h3><hr/>
                     <h:messages class="alert alert-error"/>
                     <div class = "wrapForm">
                         <h:form prependId="false" id="formSignUp">
@@ -55,11 +55,13 @@
                             <h:outputLabel class="checkbox">
                                 <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
                             </h:outputLabel>
-                            <h:commandButton class="btn btn-large btn-block  btn-success" value="Sign up" action = "#{index.signIn}" id = "submitSignUp"/>
+                            <h:commandButton class="btn btn-large btn-block  btn-success" value="Sign up" action = "#{index.signUp}" id = "submitSignUp"/>
                         </h:form>
                         <h:outputText class="btn btn-large btn-block  btn-primary" value="go to Sign in" id = "btnSignIn"/>
                     </div>
+                </div>
             </div>
+            <h:outputText id = "ouvrir" value = "Log In/Log Up" />
         </div>
     </h:body>
 </html>

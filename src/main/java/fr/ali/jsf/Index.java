@@ -63,4 +63,8 @@ public class Index {
         return "hello.xhtml";
     }
     
+    public String signUp(){
+        return "hello.xhtml";
+    }
+    
 }

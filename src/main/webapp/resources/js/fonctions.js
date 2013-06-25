@@ -10,5 +10,14 @@ $(function(){
         $("#wrapFormSignUp").fadeOut(300, function(){ $("#wrapFormSignIn").effect("slide", 500);});
             
     });
+    
+    $("#ouvrir").click(function(){
+        if ($("#volet").css("top") == "-440px") {
+            $("#volet").css("top","10px");
+        } else {
+            $("#volet").css("top","-440px");
+        }
+        
+    });
 });
 
