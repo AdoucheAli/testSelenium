@@ -8,15 +8,7 @@ $(document).ready(function(){
      if( $("#erreurSaisieSignIn").css("height") == "0px") {
      $("#volet").css("top","-" + $("#volet").css("height") );
     }
-    
-    
-//    if( $("#erreurSaisieSignUp").css("height") > "0px") {
-//        $("#wrapFormSignIn").css("display","none");
-//        $("#wrapFormSignUp").css("display","block");
-//    } else if ($("#erreurSaisieSignIn").css("height") > "0px"){
-//        $("#wrapFormSignUp").css("display","none");
-//        $("#wrapFormSignIn").css("display","block");
-//    }
+
 });
 
 $(function(){

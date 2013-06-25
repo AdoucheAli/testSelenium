@@ -26,7 +26,7 @@ public class Index {
     @NotEmpty(message = "veuillez rentrer un nom")
     private String nom;
     
-    @NotEmpty(message = "veuillez rentrer un nom")
+    @NotEmpty(message = "veuillez rentrer un prenom")
     private String prenom;
     
     @NotNull(message = "veuillez rentrer un password")
@@ -37,7 +37,8 @@ public class Index {
     @Email(message = "veuillez rentrer un email valide")
     private String email;
 
-    private boolean isPasswordOrEmailError = false;
+    private boolean isSubmittedSignIn = false;
+    private boolean isSubmittedSignUp = false;
     
     public String getNom() {
         return nom;
@@ -70,38 +71,34 @@ public class Index {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public void listener() {
-        Set<ConstraintViolation<Index>> constraintViolations = validator.validate(this);
-        System.out.println(email + " " + password);
-        System.out.println("**********************************************************");
-        
-        for (Iterator<ConstraintViolation<Index>> it = constraintViolations.iterator(); it.hasNext();) {
-            ConstraintViolation<Index> contraintes = it.next();
 
-            System.out.println("propriete path " + contraintes.getPropertyPath().toString());
-            System.out.println("**********************************************************");
-            
-            if( "email".equals(contraintes.getPropertyPath().toString()) 
-                    || "password".equals(contraintes.getPropertyPath().toString()) ) {
-                isPasswordOrEmailError = true;
-            }
-        }
+    public boolean isIsSubmittedSignIn() {
+        return isSubmittedSignIn;
+    }
+
+    public void setIsSubmittedSignIn(boolean isSubmittedSignIn) {
+        this.isSubmittedSignIn = isSubmittedSignIn;
+    }
+
+    public boolean isIsSubmittedSignUp() {
+        return isSubmittedSignUp;
+    }
+
+    public void setIsSubmittedSignUp(boolean isSubmittedSignUp) {
+        this.isSubmittedSignUp = isSubmittedSignUp;
+    }
+    
+    public void listenerSignIn() {
+
+    }
+    public void listenerSignUp() {
+
     }
     public String signIn(){
-        String goTo;
-        if (isPasswordOrEmailError) {
-            goTo = "formulaire.xhtml";
-        } else {
-            goTo = "bienvenue.xhtml";
-        }
-        return goTo;
-        
-        
+        return "signInSuccess.xhtml";   
     }
     
     public String signUp(){
-        return "hello.xhtml";
-    }
-    
+        return "SignUpSuccess.xhtml";
+    } 
 }
