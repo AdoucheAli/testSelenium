@@ -1,11 +1,16 @@
 
-.content{
-    border-radius: 20px;
+.content {
+    margin: 50px auto;
+    width: 340px;
     padding-top: 10px;
     padding-bottom: 20px;
-    
+    border-radius: 20px;
     font-family: Georgia;
     color: #fff;
+}
+
+.wrapForm{
+    padding: 10px; 
 }
 
 .outputLabel {
@@ -14,20 +19,14 @@
     height: 30px;
     line-height: 30px;
 }
-.form{
-    padding-top : 10px; 
-}
-.wrapForm {
-    margin: auto;
-    width: 330px;
-}
 
 .titre {
     text-align: center;
 }
 .erreur {
     margin: auto;
-    width: 90%;
+    width: 80%;
+    margin-bottom: 10px;
 }
 
 #contentSignIn {
@@ -38,28 +37,7 @@
     background: #e67e22;
 }
 
-#volet {
-    position: relative;
-    margin: auto;
-    padding-top: 50px;
-    /*top: -400px;*/
-    transition: all .5s ease-in;
-}
-
-#ouvrir {
-    display: block;
-    margin: auto;
-    padding: 10px 25px;
-    width: 110px;
-    background: #8e44ad;
-    color: #fff;
-    font-family: Tahoma, Arial, sans-serif;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 0px 0px 20px 20px;
-    cursor: pointer;
-    border: 10px solid #9b59b6;
-    
-    transition:border-color 300ms ease-in;
+#contentSignUp {
+    display: none;
 }
 

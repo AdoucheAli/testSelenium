@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Acceuil</title>
         <link href="./resources/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="./resources/css/design.css" rel="stylesheet"/>
         <script src="./resources/js/jquery-1.9.1.min.js"></script>
@@ -11,58 +12,52 @@
         <script src="./resources/js/fonctions.js"></script>
     </h:head>
     <h:body>
+            <div class = "content" id = "contentSignIn">
+                <h3 class = "titre">Sign In</h3><hr/>
+                <h:messages class="alert alert-error erreur" id = "erreurSaisieSignIn"/>
 
-        <div id = "volet">
-            <div class = "row-fluid" id="wrapFormSignIn">
-
-                <div class = "span4 offset4 content" id = "contentSignIn">
-                    <h3 class = "titre">Sign In</h3><hr/>
-                    <h:messages class="alert alert-error erreur" id = "erreurSaisieSignIn"/>
-
-                    <div class = "wrapForm">
-                        <h:form prependId="false" class = "form" id="formSignIn">
-                            <h:outputLabel class="outputLabel" for="inputEmailSignIn">Email</h:outputLabel>
-                            <h:inputText id="inputEmailSignIn" value = "#{index.email}"></h:inputText>
-                            <h:outputLabel class="outputLabel" for="inputPasswordSignIn">Password</h:outputLabel>
-                            <h:inputSecret id="inputPasswordSignIn" value="#{index.password}"></h:inputSecret>
-                            <h:outputLabel class="checkbox">
-                                <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
-                            </h:outputLabel>
-                            <h:commandButton type = "submit" class="btn btn-large btn-block  btn-success" value="Sign in" action = "#{index.signIn}" actionListener="#{index.listenerSignIn()}" id = "submitSignIn"/>
-                            <h:inputHidden id = "isSubmittedSignIn"/>
-                        </h:form>
-                        <h:outputText class="btn btn-large btn-block  btn-primary" value="Sign up for free" id = "btnSignUp"/>
-                    </div>
+                <div class = "wrapForm">
+                    <h:form prependId="false" class = "form" id="formSignIn" >
+                        <h:outputLabel class="outputLabel" for="inputEmailSignIn">Email</h:outputLabel>
+                        <h:inputText id="inputEmailSignIn" value = "#{index.email}"></h:inputText>
+                        <h:outputLabel class="outputLabel" for="inputPasswordSignIn">Password</h:outputLabel>
+                        <h:inputSecret id="inputPasswordSignIn" value="#{index.password}"></h:inputSecret>
+                        <h:outputLabel class="checkbox">
+                            <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
+                        </h:outputLabel>
+                        <h:commandButton type = "submit" class="btn btn-large btn-block  btn-success" value="Sign in" action = "#{index.signIn}" id = "submitSignIn"/>
+                    </h:form>
+                    <!--<h:outputText class="btn btn-large btn-block  btn-primary" value="Sign up for free" id = "btnSignUp"/>-->
+                     <h:outputLink class="btn btn-large btn-block  btn-primary" value="#contentSignUp" id = "btnSignUp">
+                            <h:outputText value="Sign up for free"/>
+                    </h:outputLink>
                 </div>
             </div>
-
-
-            <div class = "row-fluid" id="wrapFormSignUp">
-                <div class = "span4 offset4 content" id = "contentSignUp">
-                    <h3 class = "titre" id = "titreSignUp">Sign Up</h3><hr/>
-                    <h:messages class="alert alert-error erreur" id = "erreurSaisieSignUp"/>
-                    <div class = "wrapForm">
-                        <h:form prependId="false" id="formSignUp">
-                            <h:outputLabel class="outputLabel" for="inputNomSignUp">Nom</h:outputLabel>
-                            <h:inputText id="inputNomSignUp" value="#{index.nom}"></h:inputText>
-                            <h:outputLabel class="outputLabel" for="inputPrenomSignUp">Prenom</h:outputLabel>
-                            <h:inputSecret id="inputPrenomSignUp" value="#{index.prenom}"></h:inputSecret>
-                            <h:outputLabel class="outputLabel" for="inputPasswordSignUp">Password</h:outputLabel>
-                            <h:inputSecret id="inputPasswordSignUp" value="#{index.password}"></h:inputSecret>
-                            <h:outputLabel class="outputLabel" for="inputEmailSignUp">Email</h:outputLabel>
-                            <h:inputText id="inputEmailSignUp" value = "#{index.email}"></h:inputText>
-                            <h:outputLabel class="checkbox">
-                                <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
-                            </h:outputLabel>
-                            <h:commandButton class="btn btn-large btn-block  btn-success" value="Sign up" action = "#{index.signUp}" actionListener="#{index.listenerSignUp()}" id = "submitSignUp"/>
-                            <h:inputHidden id = "isSubmittedSignUp"/>
-                        </h:form>
-                        <h:outputText class="btn btn-large btn-block  btn-primary" value="go to Sign in" id = "btnSignIn"/>
-                    </div>
+            
+            <div class = "content" id = "contentSignUp">
+                <h3 class = "titre" id = "titreSignUp">Sign Up</h3><hr/>
+                <h:messages class="alert alert-error erreur" id = "erreurSaisieSignUp"/>
+                <div class = "wrapForm">
+                    <h:form prependId="false" id="formSignUp">
+                        <h:outputLabel class="outputLabel" for="inputNomSignUp">Nom</h:outputLabel>
+                        <h:inputText id="inputNomSignUp" value="#{index.nom}"></h:inputText>
+                        <h:outputLabel class="outputLabel" for="inputPrenomSignUp">Prenom</h:outputLabel>
+                        <h:inputSecret id="inputPrenomSignUp" value="#{index.prenom}"></h:inputSecret>
+                        <h:outputLabel class="outputLabel" for="inputPasswordSignUp">Password</h:outputLabel>
+                        <h:inputSecret id="inputPasswordSignUp" value="#{index.password}"></h:inputSecret>
+                        <h:outputLabel class="outputLabel" for="inputEmailSignUp">Email</h:outputLabel>
+                        <h:inputText id="inputEmailSignUp" value = "#{index.email}"></h:inputText>
+                        <h:outputLabel class="checkbox">
+                            <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
+                        </h:outputLabel>
+                        <h:commandButton class="btn btn-large btn-block  btn-success" id = "submitSignUp" value="Sign up" action = "#{index.signUp}"/>
+                    </h:form>
+                    <!--<h:outputText class="btn btn-large btn-block  btn-primary" value="go to Sign in" id = "btnSignIn"/>-->
+                    <h:outputLink class="btn btn-large btn-block  btn-primary" value="#contentSignIn" id = "btnSignIn">
+                            <h:outputText value="go to Sign in"/>
+                    </h:outputLink>
                 </div>
             </div>
-            <h:outputText id = "ouvrir" value = "Log In/Log Up" />
-        </div>
     </h:body>
 </html>
 
