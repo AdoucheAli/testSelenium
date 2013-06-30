@@ -20,23 +20,25 @@ public class UserManager {
 
     @PersistenceContext
     EntityManager em;
-    private static final Logger logger =
-            Logger.getLogger("UserManager");
-
-    public boolean checkPasswordAndEmail(Customer customerToCheck) {
-
-        boolean isFind = false;
-        try {
-            Customer user = em.createNamedQuery(Customer.BY_EMAIL, Customer.class)
-                    .setParameter("email", customerToCheck.getEmail())
+ 
+    public boolean checkPasswordAndEmail(String email, String password) {
+        Customer customer = findByEmail(email);
+        return password.equals(customer.getPassword());
+    }
+    
+    public Customer findByEmail(String email){
+         Customer customer = new Customer();
+         try {
+            customer = em.createNamedQuery(Customer.BY_EMAIL, Customer.class)
+                    .setParameter("email", email)
                     .getSingleResult();
-            isFind = user.getPassword().equals(customerToCheck.getPassword());
         } catch (NoResultException ex) {
-            HttpServletRequest httpServletRequest = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            String ip = httpServletRequest.getRemoteAddr();
-            logger.log(Level.INFO, " email et password invalid, adresse ip : {0}", ip);
         } finally {
-            return isFind;
+            return customer;
         }
+    }
+
+    public void persist(Customer user) {
+        em.persist(user);
     }
 }

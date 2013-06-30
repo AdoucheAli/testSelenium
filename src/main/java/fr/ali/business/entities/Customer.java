@@ -36,6 +36,7 @@ public class Customer implements Serializable {
     public final static String ERREUR_EMAIL_EMPTY = "veuillez rentrer un email";
     public final static String ERREUR_EMAIL_INVALID = "veuillez rentrer un email valide";
     public final static String ERREUR_EMAIL_OR_PASSWORD_WRONG = "Vérifiez votre email ou/et votre pasword";
+    public final static String ERREUR_EMAIL_USED = "Cet email est déjà utilisé";
 
     public final static String PREFIX = "fr.ali.business.entities.";
     public final static String BY_EMAIL = PREFIX + "Customer.findByEmail"; 

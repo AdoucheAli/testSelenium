@@ -26,7 +26,6 @@ public class SignInPage extends FluentPage {
 
     public void fillAndSubmitSignInForm(String... paramsOrdered) {
         fill("#formSignIn input[type='text'], #formSignIn input[type='password']").with(paramsOrdered);
-       // submit("#formSignIn");
         click("#submitSignIn");
     }
 }

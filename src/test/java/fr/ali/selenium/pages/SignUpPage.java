@@ -20,7 +20,7 @@ public class SignUpPage extends FluentPage {
     }
     
     public void fillAndSubmitSignInForm(String... paramsOrdered) {
-        fill("#formSignUp input[type='text'], #formSignIn input[type='password']").with(paramsOrdered);
-        submit("#formSignUp");
+        fill("#formSignUp input[type='text'], #formSignUp input[type='password']").with(paramsOrdered);
+         click("#submitSignUp");
     }
 }

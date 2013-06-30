@@ -1,7 +1,15 @@
+.contentSign {
+    margin: auto;
+    width: 340px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px rgba(0,0,0,.5);
+}
+
 .wrapForm{
     padding: 10px;
     padding-bottom: 15px;
     color: #fff;
+     
     
 }
 .outputLabel {
@@ -11,25 +19,29 @@
     line-height: 30px;
 }
 
+.center{
+     text-align: center;
+}
+
 .titre {
-    text-align: center;
     color: #fff;
     border-bottom: 4px solid #fff;
     padding-bottom: 5px; 
 }
-.erreur {
+
+.alert {
     margin: auto;
     margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     padding-left: 30px;
+    list-style: none;
+   
 }
 
-.contentSign {
-    margin: auto;
-    width: 340px;
-    border-radius: 20px;
-}
 #contentSignIn {
     background: #9b59b6;
+   
 }
 
 #contentSignUp {
