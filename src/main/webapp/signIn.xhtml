@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">
+        Sign In page
+    </ui:define>
+    <ui:define name="content">
+        <div id = "contentSignIn" class = "contentSign">
+            <h3 class = "titre">Sign In</h3>
+            <h:messages class="alert alert-error erreur" id = "erreurSaisieSignIn"/>
+            <div class = "wrapForm">
+                <h:form prependId="false" class = "form" id="formSignIn" >
+                    <h:outputLabel class="outputLabel" for="inputEmailSignIn">Email</h:outputLabel>
+                    <h:inputText id="inputEmailSignIn" value = "#{signIn.user.email}"></h:inputText>
+                    <h:outputLabel class="outputLabel" for="inputPasswordSignIn">Password</h:outputLabel>
+                    <h:inputSecret id="inputPasswordSignIn" value="#{signIn.user.password}"></h:inputSecret>
+                    <h:outputLabel class="checkbox">
+                        <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
+                    </h:outputLabel>
+                    <h:commandButton type = "submit" value="Sign in"
+                                     class="btn btn-large btn-block  btn-success"  id = "submitSignIn" 
+                                     action = "#{signIn.submit}" actionListener="#{signIn.verification()}"/>
+                </h:form>
+                <h:outputLink class="btn btn-large btn-block  btn-primary" value="signUp.xhtml" id = "btnSignUp">
+                    <h:outputText value="Sign up for free"/>
+                </h:outputLink>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
+

@@ -2,12 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ali.selenium;
+package fr.ali.selenium.pages;
 
-import org.fluentlenium.core.FluentPage;
-import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
+import fr.ali.selenium.Config;
 import static org.fest.assertions.Assertions.assertThat;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
+import org.fluentlenium.core.FluentPage;
 
 /**
  *
@@ -17,12 +16,12 @@ public class SignInSuccessPage extends FluentPage {
 
     @Override
     public String getUrl() {
-        return "http://localhost:8080/TestSelenium/signInSuccess.xhtml";
+        return Config.getUrl() +"/signInSuccess.xhtml";
     }
     
     @Override
     public void isAt() {
-        assertThat(title()).isEqualTo("SignIn success");
+        assertThat(title()).isEqualTo("Sign In success");
     }
 
 }

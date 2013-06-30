@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">
+        Sign Up page
+    </ui:define>
+    <ui:define name="content">
+        <div id = "contentSignUp" class = "contentSign">
+            <h3 class = "titre" id = "titreSignUp">Sign Up</h3>
+            <h:messages class="alert alert-error erreur" id = "erreurSaisieSignUp"/>
+            <div class = "wrapForm">
+                <h:form prependId="false" id="formSignUp">
+                    <h:outputLabel class="outputLabel" for="inputNomSignUp">Nom</h:outputLabel>
+                    <h:inputText id="inputNomSignUp" value="#{signUp.user.nom}"></h:inputText>
+                    <h:outputLabel class="outputLabel" for="inputPrenomSignUp">Prenom</h:outputLabel>
+                    <h:inputSecret id="inputPrenomSignUp" value="#{signUp.user.prenom}"></h:inputSecret>
+                    <h:outputLabel class="outputLabel" for="inputPasswordSignUp">Password</h:outputLabel>
+                    <h:inputSecret id="inputPasswordSignUp" value="#{signUp.user.password}"></h:inputSecret>
+                    <h:outputLabel class="outputLabel" for="inputEmailSignUp">Email</h:outputLabel>
+                    <h:inputText id="inputEmailSignUp" value = "#{signUp.user.email}"></h:inputText>
+                    <h:outputLabel class="checkbox">
+                        <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
+                    </h:outputLabel>
+                    <h:commandButton class="btn btn-large btn-block  btn-success" id = "submitSignUp" value="Sign up" action = "#{signUp.submit}"/>
+                </h:form>
+                <!--<h:outputText class="btn btn-large btn-block  btn-primary" value="go to Sign in" id = "btnSignIn"/>-->
+                <h:outputLink class="btn btn-large btn-block  btn-primary" value="signIn.xhtml" id = "btnSignIn">
+                    <h:outputText value="go to Sign in"/>
+                </h:outputLink>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
+

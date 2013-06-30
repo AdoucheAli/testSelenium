@@ -1,18 +1,9 @@
-
-.content {
-    margin: 50px auto;
-    width: 340px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    border-radius: 20px;
-    font-family: Georgia;
-    color: #fff;
-}
-
 .wrapForm{
-    padding: 10px; 
+    padding: 10px;
+    padding-bottom: 15px;
+    color: #fff;
+    
 }
-
 .outputLabel {
     float: left;
     width: 100px;
@@ -22,13 +13,21 @@
 
 .titre {
     text-align: center;
+    color: #fff;
+    border-bottom: 4px solid #fff;
+    padding-bottom: 5px; 
 }
 .erreur {
     margin: auto;
-    width: 80%;
     margin-bottom: 10px;
+    padding-left: 30px;
 }
 
+.contentSign {
+    margin: auto;
+    width: 340px;
+    border-radius: 20px;
+}
 #contentSignIn {
     background: #9b59b6;
 }
@@ -36,8 +35,3 @@
 #contentSignUp {
     background: #e67e22;
 }
-
-#contentSignUp {
-    display: none;
-}
-

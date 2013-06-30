@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ali.selenium;
+package fr.ali.selenium.pages;
 
+import fr.ali.selenium.Config;
 import static org.fest.assertions.Assertions.assertThat;
 import org.fluentlenium.core.FluentPage;
 
@@ -11,20 +12,21 @@ import org.fluentlenium.core.FluentPage;
  *
  * @author Adouche Ali
  */
-public class IndexPage extends FluentPage {
+public class SignInPage extends FluentPage {
 
     @Override
     public String getUrl() {
-        return "http://localhost:8080/TestSelenium/";
+        return  Config.getUrl() + "/signIn.xhtml";
     }
 
     @Override
     public void isAt() {
-        assertThat(title()).isEqualTo("Acceuil");
+        assertThat(title()).isEqualTo("Sign In page");
     }
 
     public void fillAndSubmitSignInForm(String... paramsOrdered) {
         fill("#formSignIn input[type='text'], #formSignIn input[type='password']").with(paramsOrdered);
-        submit("#formSignIn");
+       // submit("#formSignIn");
+        click("#submitSignIn");
     }
 }
