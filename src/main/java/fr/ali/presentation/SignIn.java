@@ -5,6 +5,7 @@ import fr.ali.business.entities.Customer;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,10 +33,9 @@ public class SignIn implements Serializable {
     
     private boolean isFind = false;
 
+    //actionListener
     public void verification() {
-        System.out.println(customer.getEmail()+ " " + customer.getPassword());
         isFind = userManager.checkPasswordAndEmail(customer.getEmail(), customer.getPassword());
-        System.out.println(isFind);
     }
 
     public String submit() {
@@ -47,5 +47,10 @@ public class SignIn implements Serializable {
             facesContext.addMessage(null, msg);
         }
         return view;
+    }
+    
+    public String logOut() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "signIn.xhtml?faces-redirect=true";
     }
 }

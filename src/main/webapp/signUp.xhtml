@@ -5,34 +5,31 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html">
 
-    <ui:define name="title">
-        Sign Up page
+    <ui:define name = "title">
+        Sign up page
     </ui:define>
-    <ui:define name="content">
+    <ui:define name = "content">
         <div id = "contentSignUp" class = "contentSign">
-            <h3 class = "titre center" id = "titreSignUp">Sign Up</h3>
-            <h:messages class="alert #{signUp.emailNotUsed == false?'alert-error':'alert-success center'}" 
+            <h3 class = "titre center" id = "titreSignUp">Sign up</h3>
+            <h:messages class = "alert #{signUp.emailNotUsed == false?'alert-error':'alert-success center'}" 
                         id = "messageSaisieSignUp"/>
             <div class = "wrapForm">
                 <h:form prependId="false" id="formSignUp">
-                    <h:outputLabel class="outputLabel" for="inputNomSignUp">Nom</h:outputLabel>
-                    <h:inputText id="inputNomSignUp" value="#{signUp.customer.nom}"></h:inputText>
-                    <h:outputLabel class="outputLabel" for="inputPrenomSignUp">Prenom</h:outputLabel>
-                    <h:inputText id="inputPrenomSignUp" value="#{signUp.customer.prenom}"></h:inputText>
-                    <h:outputLabel class="outputLabel" for="inputEmailSignUp">Email</h:outputLabel>
-                    <h:inputText id="inputEmailSignUp" value = "#{signUp.customer.email}"></h:inputText>
-                    <h:outputLabel class="outputLabel" for="inputPasswordSignUp">Password</h:outputLabel>
-                    <h:inputSecret id="inputPasswordSignUp" value="#{signUp.customer.password}"></h:inputSecret>
-                    <h:outputLabel class="checkbox">
-                        <h:selectBooleanCheckbox>Remember me</h:selectBooleanCheckbox>
-                    </h:outputLabel>
-                    <h:commandButton value="Sign up" 
-                                     class="btn btn-large btn-block  btn-success" id = "submitSignUp" 
-                                     action = "#{signUp.submit}" actionListener="#{signUp.verification()}"/>
+                    <h:outputLabel class = "outputLabel" for = "inputNomSignUp">Nom</h:outputLabel>
+                    <h:inputText id = "inputNomSignUp" value = "#{signUp.customer.nom}"></h:inputText>
+                    <h:outputLabel class = "outputLabel" for = "inputPrenomSignUp">Prenom</h:outputLabel>
+                    <h:inputText id = "inputPrenomSignUp" value = "#{signUp.customer.prenom}"></h:inputText>
+                    <h:outputLabel class = "outputLabel" for = "inputEmailSignUp">Email</h:outputLabel>
+                    <h:inputText id = "inputEmailSignUp" value = "#{signUp.customer.email}"></h:inputText>
+                    <h:outputLabel class = "outputLabel" for = "inputPasswordSignUp">Password</h:outputLabel>
+                    <h:inputSecret id = "inputPasswordSignUp" value = "#{signUp.customer.password}"></h:inputSecret>
+                    <h:commandButton value = "Sign up" 
+                                     class = "btn btn-large btn-block  btn-success" id = "submitSignUp" 
+                                     action = "#{signUp.submit}" actionListener = "#{signUp.verification()}"/>
                 </h:form>
-                <!--<h:outputText class="btn btn-large btn-block  btn-primary" value="go to Sign in" id = "btnSignIn"/>-->
-                <h:outputLink class="btn btn-large btn-block  btn-primary" value="signIn.xhtml" id = "btnSignIn">
-                    <h:outputText value="go to Sign in"/>
+                <h:outputLink value = "signIn.xhtml" 
+                              class = "btn btn-large btn-block  btn-primary"  id = "btnSignIn">
+                    <h:outputText value = "Go to Sign in"/>
                 </h:outputLink>
             </div>
         </div>

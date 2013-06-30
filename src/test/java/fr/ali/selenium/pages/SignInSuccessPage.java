@@ -21,7 +21,7 @@ public class SignInSuccessPage extends FluentPage {
     
     @Override
     public void isAt() {
-        assertThat(title()).isEqualTo("Sign In success");
+        assertThat(title()).isEqualTo("Sign in success");
     }
 
 }

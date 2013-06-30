@@ -1,15 +1,10 @@
 package fr.ali.business.boundary;
 
 import fr.ali.business.entities.Customer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -27,14 +22,14 @@ public class UserManager {
     }
     
     public Customer findByEmail(String email){
-         Customer customer = new Customer();
-         try {
+        Customer customer = null;
+        try {
             customer = em.createNamedQuery(Customer.BY_EMAIL, Customer.class)
                     .setParameter("email", email)
                     .getSingleResult();
-        } catch (NoResultException ex) {
         } finally {
-            return customer;
+            return (customer != null) ? customer
+                                      : new Customer();
         }
     }
 

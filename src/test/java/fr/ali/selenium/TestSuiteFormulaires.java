@@ -13,8 +13,9 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+    fr.ali.selenium.TestSignInPage.class,
     fr.ali.selenium.TestSignUpPage.class,
-    fr.ali.selenium.TestSignInPage.class
+    fr.ali.selenium.TestSignInSuccessPage.class
 })
 public class TestSuiteFormulaires {
     

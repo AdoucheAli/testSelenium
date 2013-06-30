@@ -35,6 +35,7 @@ public class SignUp {
     
     private boolean isEmailNotUsed = false;
     
+    //actionListener
     public void verification() {
         Customer cust = userManager.findByEmail(this.customer.getEmail());
         isEmailNotUsed = (null == cust.getId());

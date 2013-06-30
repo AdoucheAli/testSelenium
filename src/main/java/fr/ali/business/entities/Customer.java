@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Email;
-
 /**
  *
  * @author Adouche Ali
@@ -64,6 +63,4 @@ public class Customer implements Serializable {
     @Email(message = ERREUR_EMAIL_INVALID)
     @NonNull
     private String email;
-
-
 }

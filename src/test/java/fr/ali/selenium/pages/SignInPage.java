@@ -21,7 +21,7 @@ public class SignInPage extends FluentPage {
 
     @Override
     public void isAt() {
-        assertThat(title()).isEqualTo("Sign In page");
+        assertThat(title()).isEqualTo("Sign in page");
     }
 
     public void fillAndSubmitSignInForm(String... paramsOrdered) {

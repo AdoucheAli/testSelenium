@@ -14,7 +14,7 @@ import org.fluentlenium.core.domain.FluentList;
 import org.junit.Before;
 import org.junit.Test;
 
-@SharedDriver(type = SharedDriver.SharedType.PER_CLASS)
+@SharedDriver(type = SharedDriver.SharedType.ONCE)
 public class TestSignUpPage extends FluentTest {
 
     @Page
@@ -46,7 +46,7 @@ public class TestSignUpPage extends FluentTest {
         champs = Arrays.array("paris", "paris", "paris@yahoo.fr", "parisparis");
         signUpPage.fillAndSubmitSignInForm(champs);
         checkNumberOfMessages(1);
-        checkErrorText("sign up effectué");
+        checkMessageText("sign up effectué");
     }
     
     @Test
@@ -62,7 +62,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorText(Customer.ERREUR_PASSWORD_EMPTY);
+        checkMessageText(Customer.ERREUR_PASSWORD_EMPTY);
     }
 
     @Test
@@ -71,13 +71,13 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorText(Customer.ERREUR_PASSWORD_OUT_OF_RANGE);
+        checkMessageText(Customer.ERREUR_PASSWORD_OUT_OF_RANGE);
 
         champs[3] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa";
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorText(Customer.ERREUR_PASSWORD_OUT_OF_RANGE);
+        checkMessageText(Customer.ERREUR_PASSWORD_OUT_OF_RANGE);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorText(Customer.ERREUR_EMAIL_EMPTY);
+        checkMessageText(Customer.ERREUR_EMAIL_EMPTY);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorText(Customer.ERREUR_EMAIL_INVALID);
+        checkMessageText(Customer.ERREUR_EMAIL_INVALID);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorText(Customer.ERREUR_NOM_EMPTY);
+        checkMessageText(Customer.ERREUR_NOM_EMPTY);
     }
 
     @Test
@@ -113,7 +113,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorText(Customer.ERREUR_PRENOM_EMPTY);
+        checkMessageText(Customer.ERREUR_PRENOM_EMPTY);
     }
    
     @Test
@@ -122,7 +122,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfMessages(1);
-        checkErrorText(Customer.ERREUR_EMAIL_USED);
+        checkMessageText(Customer.ERREUR_EMAIL_USED);
         
     }
     
@@ -132,11 +132,11 @@ public class TestSignUpPage extends FluentTest {
         return assertThat(find("#messageSaisieSignUp").find("li")).hasSize(size);
     }
 
-    private void checkErrorText(final String message) {
-        checkErrorText(find("#messageSaisieSignUp").find("li"), message);
+    private void checkMessageText(final String message) {
+        checkText(find("#messageSaisieSignUp").find("li"), message);
     }
 
-    private void checkErrorText(final FluentList baliseHTML, final String message) {
+    private void checkText(final FluentList baliseHTML, final String message) {
         assertThat(baliseHTML).hasText(message);
     }
 }
