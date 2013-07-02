@@ -1,6 +1,7 @@
 package fr.ali.business.entities;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,7 @@ public class Customer implements Serializable {
     public final static String ERREUR_NOM_EMPTY = "veuillez rentrer un nom";
     public final static String ERREUR_PRENOM_EMPTY = "veuillez rentrer un prenom";
     public final static String ERREUR_PASSWORD_EMPTY = "veuillez rentrer un password";
-    public final static String ERREUR_PASSWORD_OUT_OF_RANGE = "veuillez rentrer un password compris entre " + PASSWORD_SIZE_MIN + " et " + PASSWORD_SIZE_MAX +" caractères";
+    public final static String ERREUR_PASSWORD_OUT_OF_RANGE = "veuillez rentrer un password compris entre {min} et {max} caractères";
     public final static String ERREUR_EMAIL_EMPTY = "veuillez rentrer un email";
     public final static String ERREUR_EMAIL_INVALID = "veuillez rentrer un email valide";
     public final static String ERREUR_EMAIL_OR_PASSWORD_WRONG = "Vérifiez votre email ou/et votre pasword";
@@ -39,6 +40,7 @@ public class Customer implements Serializable {
 
     public final static String PREFIX = "fr.ali.business.entities.";
     public final static String BY_EMAIL = PREFIX + "Customer.findByEmail"; 
+
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

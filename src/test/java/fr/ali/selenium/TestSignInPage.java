@@ -11,6 +11,7 @@ import org.fest.assertions.fluentlenium.custom.FluentListAssert;
 import org.fest.util.Arrays;
 import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.adapter.util.SharedDriver;
+import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
 import org.junit.Before;
@@ -39,7 +40,7 @@ public class TestSignInPage extends FluentTest {
 
     @Test
     public void should_return_is_At_SignIn() {
-        assertThat(signInPage).isAt();
+        checkPageTitle(signInPage);
     }
 
     @Test
@@ -48,16 +49,17 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
         await().untilPage(signInSuccessPage).isLoaded();
         
-        assertThat(signInSuccessPage).isAt();   
+        checkPageTitle(signInSuccessPage);   
     }
    
     @Test
     public void should_print_message_in_signInSuccessPage() {
         champs = Arrays.array("adoucheali@yahoo.fr", "adoucheali");
+        
         signInPage.fillAndSubmitSignInForm(champs);
         await().untilPage(signInSuccessPage).isLoaded();
 
-        assertThat(signInSuccessPage).isAt();
+        checkPageTitle(signInSuccessPage);
         String expected = MessageFormat.format("email : {0}, password : {1}", champs[0], champs[1]);
         checkText(find("p"), expected);
     }
@@ -65,18 +67,21 @@ public class TestSignInPage extends FluentTest {
     @Test
     public void should_should_go_to_Sign_Up_page() {
         click("#btnSignUp").await().untilPage(signUpPage).isLoaded();
-        assertThat(signUpPage).isAt(); 
+        
+        checkPageTitle(signUpPage); 
     }
     
     @Test
     public void should_return_2_errors() {
         signInPage.fillAndSubmitSignInForm();
+        
         checkNumberOfErrors(2);
     }
 
     @Test
     public void should_return_password_is_empty_error() {
         champs = Arrays.array("adoucheali@yahoo.fr", "");
+        
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
@@ -86,20 +91,27 @@ public class TestSignInPage extends FluentTest {
     @Test
     public void should_return_password_is_out_of_range_error() {
         champs = Arrays.array("adoucheali@yahoo.fr", "adouche");
+        String min =  Integer.toString(Customer.PASSWORD_SIZE_MIN);
+        String max =  Integer.toString(Customer.PASSWORD_SIZE_MAX);
+        String message = Customer.ERREUR_PASSWORD_OUT_OF_RANGE.replace("{min}", min).replace("{max}", max);
+        
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
-        checkMessageText(Customer.ERREUR_PASSWORD_OUT_OF_RANGE);
+        checkMessageText(message);
 
         champs[1] = "adoucheuuuuuuuuuuuuuuu";
+        
+        signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
-        checkMessageText(Customer.ERREUR_PASSWORD_OUT_OF_RANGE);
+        checkMessageText(message);
     }
 
     @Test
     public void should_return_email_is_empty_error() {
         champs = Arrays.array("", "adoucheali");
+        
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
@@ -109,12 +121,16 @@ public class TestSignInPage extends FluentTest {
     @Test
     public void should_return_email_or_password_wrong() {
         champs = Arrays.array("adouche@yahoo.fr", "adouchealii");
+        
         signInPage.fillAndSubmitSignInForm(champs);
+        
         checkNumberOfErrors(1);
         checkMessageText(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
         
         champs[1] = "adouchealii";
 
+        signInPage.fillAndSubmitSignInForm(champs);
+        
         checkNumberOfErrors(1);
         checkMessageText(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
     }
@@ -122,6 +138,7 @@ public class TestSignInPage extends FluentTest {
     @Test
     public void should_return_email_is_invalid_error() {
         champs = Arrays.array("adoucheali", "adoucheali");
+        
         signInPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfErrors(1);
@@ -139,5 +156,9 @@ public class TestSignInPage extends FluentTest {
 
     private void checkText(final FluentList baliseHTML, final String message) {
         assertThat(baliseHTML).hasText(message);
+    }
+
+    private void checkPageTitle(final FluentPage page) {
+        assertThat(page).isAt();
     }
 }
