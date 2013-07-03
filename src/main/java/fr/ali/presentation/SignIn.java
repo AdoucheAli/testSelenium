@@ -5,7 +5,6 @@ import fr.ali.business.entities.Customer;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -39,9 +38,9 @@ public class SignIn implements Serializable {
     }
 
     public String submit() {
-        String view = "signIn.xhtml";
+        String view = "signIn";
         if (isFind) {
-            view = "signInSuccess.xhtml?faces-redirect=true";
+            view = "signInSuccess?faces-redirect=true";
         } else {
             FacesMessage msg = new FacesMessage(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
             facesContext.addMessage(null, msg);
@@ -51,6 +50,6 @@ public class SignIn implements Serializable {
     
     public String logOut() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "signIn.xhtml?faces-redirect=true";
+        return "signIn?faces-redirect=true";
     }
 }
