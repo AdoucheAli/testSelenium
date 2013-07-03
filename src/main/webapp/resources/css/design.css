@@ -101,3 +101,7 @@ h1 {
 #contentSignUp {
     background: #e67e22;
 }
+
+#message-success {
+    display:block;
+}

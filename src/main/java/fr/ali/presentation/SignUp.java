@@ -9,6 +9,7 @@ import fr.ali.business.entities.Customer;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
@@ -43,20 +44,22 @@ public class SignUp {
     }
     
     public String submit() {
-        FacesMessage msg = new FacesMessage();
         StringBuilder view = new StringBuilder() ;
         view.append("signUp");
         if (isEmailNotUsed) {
             userManager.persist(customer);
             customer = new Customer();
-            msg.setSummary("sign up effectué");
-            /*view.append("?faces-redirect=true");
-             * à utiliser pour eviter que l'utilisateur ne soumettent le meme formulaire plusieur fois
-             * dans notre cas verification sur email donc pas de souci de soumission multiple*/
+            //le message s'affichera la premiere fois, si rafraichissement de la page le message disparait.
+            Flash flash = facesContext.getExternalContext().getFlash();
+            flash.put("success","sign up effectué");
+            //pour eviter que l'utilisateur ne soumettent le meme formulaire plusieur fois.
+            view.append("?faces-redirect=true");
+
         } else {
-            msg.setSummary(Customer.ERREUR_EMAIL_USED);
+            FacesMessage msg = new FacesMessage(Customer.ERREUR_EMAIL_USED);
+            facesContext.addMessage(null, msg);
         }
-        facesContext.addMessage(null, msg);
+       
         return view.toString();
     }  
 }

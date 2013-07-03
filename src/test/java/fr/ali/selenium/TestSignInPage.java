@@ -85,7 +85,7 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
-        checkMessageText(Customer.ERREUR_PASSWORD_EMPTY);
+        checkErrorMessage(Customer.ERREUR_PASSWORD_EMPTY);
     }
 
     @Test
@@ -98,14 +98,14 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
-        checkMessageText(message);
+        checkErrorMessage(message);
 
         champs[1] = "adoucheuuuuuuuuuuuuuuu";
         
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
-        checkMessageText(message);
+        checkErrorMessage(message);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
-        checkMessageText(Customer.ERREUR_EMAIL_EMPTY);
+        checkErrorMessage(Customer.ERREUR_EMAIL_EMPTY);
     }
     
     @Test
@@ -125,14 +125,14 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfErrors(1);
-        checkMessageText(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
+        checkErrorMessage(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
         
         champs[1] = "adouchealii";
 
         signInPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfErrors(1);
-        checkMessageText(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
+        checkErrorMessage(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
     }
 
     @Test
@@ -142,16 +142,16 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfErrors(1);
-        checkMessageText(Customer.ERREUR_EMAIL_INVALID);
+        checkErrorMessage(Customer.ERREUR_EMAIL_INVALID);
     } 
 //==============================================================================
 
     private FluentListAssert checkNumberOfErrors(final int size) {
-        return assertThat(find("#erreurSaisieSignIn").find("li")).hasSize(size);
+        return assertThat(findBaliseLi()).hasSize(size);
     }
 
-    private void checkMessageText(final String message) {
-        checkText(find("#erreurSaisieSignIn").find("li"), message);
+    private void checkErrorMessage(final String message) {
+        checkText(findBaliseLi(), message);
     }
 
     private void checkText(final FluentList baliseHTML, final String message) {
@@ -160,5 +160,9 @@ public class TestSignInPage extends FluentTest {
 
     private void checkPageTitle(final FluentPage page) {
         assertThat(page).isAt();
+    }
+
+    private FluentList findBaliseLi() {
+        return find("#erreurSaisieSignIn").find("li");
     }
 }

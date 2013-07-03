@@ -4,6 +4,8 @@ import fr.ali.business.entities.Customer;
 import fr.ali.selenium.pages.SignInPage;
 import fr.ali.selenium.pages.SignUpPage;
 import java.util.concurrent.TimeUnit;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
 import org.fest.assertions.fluentlenium.custom.FluentListAssert;
 import org.fest.util.Arrays;
@@ -22,6 +24,7 @@ public class TestSignUpPage extends FluentTest {
     private SignUpPage signUpPage;
     @Page
     private SignInPage signInPage;
+
     private String[] champs = new String[4];
 
     @Before
@@ -45,12 +48,13 @@ public class TestSignUpPage extends FluentTest {
     
     @Test
     public void should_succeed_to_sign_up() {
+        //nom, prenom, email, password.Il faut garder le meme ordre que dans la page xhtml.
         champs = Arrays.array("paris", "paris", "paris@yahoo.fr", "parisparis");
         
         signUpPage.fillAndSubmitSignInForm(champs);
         
-        checkNumberOfMessages(1);
-        checkMessageText("sign up effectué");
+        checkNumberOfMessages(0);
+        checkText(find("#message-success"), "sign up effectué");
     }
     
     @Test
@@ -62,13 +66,12 @@ public class TestSignUpPage extends FluentTest {
 
     @Test
     public void should_return_password_is_empty_error() {
-        //nom, prenom, email, password.Il faut garder le meme ordre que dans la page xhtml.
         champs = Arrays.array("adouche", "ali", "adoucheali@yahoo.fr", "");
         
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkMessageText(Customer.ERREUR_PASSWORD_EMPTY);
+        checkErrorMessage(Customer.ERREUR_PASSWORD_EMPTY);
     }
 
     @Test
@@ -81,14 +84,14 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkMessageText(message);
+        checkErrorMessage(message);
 
         champs[3] = "aaaaaaaaaaaaaaaaaaaaaaaaaaaa";
         
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkMessageText(message);
+        checkErrorMessage(message);
     }
 
     @Test
@@ -98,7 +101,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkMessageText(Customer.ERREUR_EMAIL_EMPTY);
+        checkErrorMessage(Customer.ERREUR_EMAIL_EMPTY);
     }
 
     @Test
@@ -108,7 +111,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkMessageText(Customer.ERREUR_EMAIL_INVALID);
+        checkErrorMessage(Customer.ERREUR_EMAIL_INVALID);
     }
 
     @Test
@@ -119,7 +122,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkMessageText(Customer.ERREUR_NOM_EMPTY);
+        checkErrorMessage(Customer.ERREUR_NOM_EMPTY);
     }
 
     @Test
@@ -129,7 +132,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkMessageText(Customer.ERREUR_PRENOM_EMPTY);
+        checkErrorMessage(Customer.ERREUR_PRENOM_EMPTY);
     }
    
     @Test
@@ -139,18 +142,18 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfMessages(1);
-        checkMessageText(Customer.ERREUR_EMAIL_USED);
+        checkErrorMessage(Customer.ERREUR_EMAIL_USED);
         
     }
     
 //==============================================================================
 
     private FluentListAssert checkNumberOfMessages(final int size) {
-        return assertThat(find("#messageSaisieSignUp").find("li")).hasSize(size);
+        return assertThat(findBaliseLi()).hasSize(size);
     }
 
-    private void checkMessageText(final String message) {
-        checkText(find("#messageSaisieSignUp").find("li"), message);
+    private void checkErrorMessage(final String message) {
+        checkText(findBaliseLi(), message);
     }
 
     private void checkText(final FluentList baliseHTML, final String message) {
@@ -159,5 +162,9 @@ public class TestSignUpPage extends FluentTest {
 
     private void checkPageTitle(final FluentPage page) {
         assertThat(page).isAt();
+    }
+ 
+    private FluentList findBaliseLi() {
+        return find("#message-error").find("li");
     }
 }

@@ -11,8 +11,9 @@
     <ui:define name = "content">
         <div id = "contentSignUp" class = "contentSign">
             <h3 class = "titre center" id = "titreSignUp">Sign up</h3>
-            <h:messages class = "alert #{signUp.emailNotUsed == false?'alert-error':'alert-success center'}" 
-                        id = "messageSaisieSignUp"/>
+            <h:messages class = "alert alert-error" id = "message-error"/>
+            <h:outputText value = "#{flash.success}" rendered ="#{flash.success != null}" class = "alert alert-success center" id="message-success"/>
+            
             <div class = "wrapForm">
                 <h:form prependId="false" id="formSignUp">
                     <h:outputLabel class = "outputLabel" for = "inputNomSignUp">Nom</h:outputLabel>
@@ -32,6 +33,7 @@
                     <h:outputText value = "Go to Sign in"/>
                 </h:outputLink>
             </div>
+            
         </div>
     </ui:define>
 
