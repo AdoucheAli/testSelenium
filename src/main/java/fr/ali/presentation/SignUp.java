@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.ali.presentation;
 
-import fr.ali.business.boundary.UserManager;
+import fr.ali.business.boundary.CustomerManager;
 import fr.ali.business.entities.Customer;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -14,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-
 /**
  *
  * @author Adouche Ali
@@ -29,7 +24,7 @@ public class SignUp {
     Customer customer;
     
     @Inject
-    UserManager userManager;
+    CustomerManager userManager;
     
     @Inject
     FacesContext facesContext;
@@ -40,7 +35,6 @@ public class SignUp {
     public void verification() {
         Customer cust = userManager.findByEmail(this.customer.getEmail());
         isEmailNotUsed = (null == cust.getId());
-        System.out.println(isEmailNotUsed);
     }
     
     public String submit() {

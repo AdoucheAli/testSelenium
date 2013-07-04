@@ -24,8 +24,20 @@ public class TestSignInSuccessPage extends FluentTest {
     private SignInSuccessPage signInSuccessPage;
 
     @Test
-    public void should_return_is_At_SignInSuucess() {
+    public void should_return_is_At_SignIn() {
         goTo(signInSuccessPage);
+        checkPageTitle(signInPage);//obligation de se logguer pour acceder à la page signInSuccess
+        checkText(find("#erreurSaisieSignIn").find("li"), "veuillez vous authentifier pour acceder à la page signInSuccess.xhtml");
+    }
+    
+    @Test
+    public void should_return_is_At_SignInSuccess() {
+        goTo(signInSuccessPage);
+        checkPageTitle(signInPage);
+        String[] champs = {"adoucheali@yahoo.fr", "adoucheali"};
+        signInPage.fillAndSubmitSignInForm(champs);
+        await().untilPage(signInSuccessPage).isLoaded();
+        
         checkPageTitle(signInSuccessPage);
     }
     
@@ -44,12 +56,8 @@ public class TestSignInSuccessPage extends FluentTest {
         click("#btnLogout");
         await().untilPage(signInPage).isLoaded();
         
-        goTo(signInSuccessPage);
-        await().untilPage(signInSuccessPage).isLoaded();
-        
-        checkPageTitle(signInSuccessPage);
-        expected = "email : , password :";
-        checkText(find("p"), expected);
+        checkPageTitle(signInPage);
+
         
     }
  //=============================================================================================   

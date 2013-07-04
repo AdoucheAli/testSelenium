@@ -1,31 +1,31 @@
 package fr.ali.presentation;
 
-import fr.ali.business.boundary.UserManager;
+import fr.ali.business.boundary.CustomerHolder;
+import fr.ali.business.boundary.CustomerManager;
 import fr.ali.business.entities.Customer;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-
 /**
  *
  * @author Adouche Ali
  */
 @Named
-@SessionScoped
+@RequestScoped
 @Getter  //annotation lombok 
 @Setter //annotation lombok
 public class SignIn implements Serializable {
 
     @Inject
-    Customer customer;
+    CustomerHolder customerHolder;
     
     @Inject
-    UserManager userManager;
+    CustomerManager userManager;
     
     @Inject
     FacesContext facesContext;
@@ -34,13 +34,18 @@ public class SignIn implements Serializable {
 
     //actionListener
     public void verification() {
-        isFind = userManager.checkPasswordAndEmail(customer.getEmail(), customer.getPassword());
+        Long id = userManager.checkPasswordAndEmail(customerHolder.getCurrentCustomer().getEmail(), 
+                customerHolder.getCurrentCustomer().getPassword());
+        if ( id.compareTo(0L) > 0 ) {
+            customerHolder.getCurrentCustomer().setId(id);
+            isFind = true;
+        }
     }
 
     public String submit() {
         String view = "signIn";
         if (isFind) {
-            view = "signInSuccess?faces-redirect=true";
+            view = checkOriginalViewId();
         } else {
             FacesMessage msg = new FacesMessage(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
             facesContext.addMessage(null, msg);
@@ -51,5 +56,18 @@ public class SignIn implements Serializable {
     public String logOut() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "signIn?faces-redirect=true";
+    }
+
+    private String checkOriginalViewId() {
+        StringBuilder view = new StringBuilder();
+        String viewId = customerHolder.getOriginalViewId();
+        if (viewId != null) {
+            view.append(viewId);
+            customerHolder.setOriginalViewId(null);
+        } else {
+            view.append("signInSuccess");
+        }
+        view.append("?faces-redirect=true");
+        return view.toString();
     }
 }

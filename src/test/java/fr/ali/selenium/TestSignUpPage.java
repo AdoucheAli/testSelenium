@@ -4,8 +4,6 @@ import fr.ali.business.entities.Customer;
 import fr.ali.selenium.pages.SignInPage;
 import fr.ali.selenium.pages.SignUpPage;
 import java.util.concurrent.TimeUnit;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
 import org.fest.assertions.fluentlenium.custom.FluentListAssert;
 import org.fest.util.Arrays;

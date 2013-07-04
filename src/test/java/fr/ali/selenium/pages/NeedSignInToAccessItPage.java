@@ -7,16 +7,15 @@ import org.fluentlenium.core.FluentPage;
  *
  * @author Adouche Ali
  */
-public class SignInSuccessPage extends FluentPage {
-
-    @Override
-    public String getUrl() {
-        return Config.getUrl() +"/signInSuccess.xhtml";
-    }
+public class NeedSignInToAccessItPage extends FluentPage {
     
     @Override
-    public void isAt() {
-        assertThat(title()).isEqualTo("Sign in success");
+    public String getUrl() {
+        return  Config.getUrl() + "/needSignInToAccessIt.xhtml";
     }
 
+    @Override
+    public void isAt() {
+        assertThat(title()).isEqualTo("Authentification obligatoire");
+    }
 }

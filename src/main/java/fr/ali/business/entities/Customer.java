@@ -1,7 +1,6 @@
 package fr.ali.business.entities;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -3,22 +3,20 @@ package fr.ali.business.boundary;
 import fr.ali.business.entities.Customer;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-
 /**
  *
  * @author Adouche Ali
  */
 @Stateless
-public class UserManager {
+public class CustomerManager {
 
     @PersistenceContext
     EntityManager em;
  
-    public boolean checkPasswordAndEmail(String email, String password) {
+    public Long checkPasswordAndEmail(String email, String password) {
         Customer customer = findByEmail(email);
-        return password.equals(customer.getPassword());
+        return ( password.equals(customer.getPassword()) )? customer.getId(): 0L;
     }
     
     public Customer findByEmail(String email){
