@@ -9,7 +9,7 @@
         Sign in success
     </ui:define>
     <ui:define name="content">
-        <p>email : #{signIn.customer.email}, password : #{signIn.customer.password}</p>
+        <p>email : #{signIn.customerHolder.currentCustomer.email}, password : #{signIn.customerHolder.currentCustomer.password}</p>
         <h:form prependId = "false">
             <h:commandLink value="se deconnecter" action="#{signIn.logOut()}" id = "btnLogout"/>
         </h:form>

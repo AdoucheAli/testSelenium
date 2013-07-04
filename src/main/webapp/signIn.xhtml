@@ -15,17 +15,17 @@
             <div class = "wrapForm">
                 <h:form prependId = "false" class = "form" id = "formSignIn" >
                     <h:outputLabel class = "outputLabel" for = "inputEmailSignIn">Email</h:outputLabel>
-                    <h:inputText id = "inputEmailSignIn" value = "#{signIn.customer.email}"></h:inputText>
+                    <h:inputText id = "inputEmailSignIn" value = "#{signIn.customerHolder.currentCustomer.email}"></h:inputText>
                     <h:outputLabel class = "outputLabel" for = "inputPasswordSignIn">Password</h:outputLabel>
-                    <h:inputSecret id = "inputPasswordSignIn" value = "#{signIn.customer.password}"></h:inputSecret>
+                    <h:inputSecret id = "inputPasswordSignIn" value = "#{signIn.customerHolder.currentCustomer.password}"></h:inputSecret>
                     <h:commandButton value = "Sign in"
                                      class = "btn btn-large btn-block  btn-success"  id = "submitSignIn" 
-                                     action = "#{signIn.submit}" actionListener = "#{signIn.verification()}"/>
+                                     action = "#{signIn.submit}" actionListener = "#{signIn.verification}"/>
                 </h:form>
                 <h:outputLink value = "signUp.xhtml" 
                               class = "btn btn-large btn-block  btn-primary"  id = "btnSignUp">
                     <h:outputText value = "Go to sign up"/>
-                </h:outputLink>
+                </h:outputLink>  
             </div>
         </div>
     </ui:define>
