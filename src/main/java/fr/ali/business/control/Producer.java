@@ -7,10 +7,13 @@ import javax.faces.context.FacesContext;
  *
  * @author Adouche Ali
  */
+
 public class Producer {
+
     
-    @Produces @RequestScoped
+    @Produces
+    @RequestScoped
     public FacesContext getFacesContext() {
-         return FacesContext.getCurrentInstance();
+        return FacesContext.getCurrentInstance();
     }
 }

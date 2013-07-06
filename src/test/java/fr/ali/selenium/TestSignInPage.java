@@ -4,7 +4,12 @@ import fr.ali.business.entities.Customer;
 import fr.ali.selenium.pages.SignInPage;
 import fr.ali.selenium.pages.SignInSuccessPage;
 import fr.ali.selenium.pages.SignUpPage;
+import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
 import org.fest.assertions.fluentlenium.custom.FluentListAssert;
@@ -15,22 +20,24 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 @SharedDriver(type = SharedDriver.SharedType.ONCE)
 public class TestSignInPage extends FluentTest {
 
-    @Page
-    private SignInPage signInPage;
-    
-    @Page
-    private SignUpPage signUpPage;
-    
-    @Page
-    private SignInSuccessPage signInSuccessPage;
-    
+    @Page private SignInPage signInPage;
+    @Page private SignUpPage signUpPage;
+    @Page private SignInSuccessPage signInSuccessPage;
     private String[] champs = new String[2];
+    private static Properties properties;
 
+    @BeforeClass
+    public static void load() throws IOException {
+        properties = new Properties();
+        properties.load(TestSignInPage.class.getResourceAsStream("/ValidationMessages.properties"));
+    }
+    
     @Before
     public void openBrowser() {
         goTo(signInPage);
@@ -65,7 +72,7 @@ public class TestSignInPage extends FluentTest {
     }
 
     @Test
-    public void should_should_go_to_Sign_Up_page() {
+    public void should_go_to_Sign_Up_page() {
         click("#btnSignUp").await().untilPage(signUpPage).isLoaded();
         
         checkPageTitle(signUpPage); 
@@ -85,7 +92,7 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
-        checkErrorMessage(Customer.ERREUR_PASSWORD_EMPTY);
+        checkErrorMessage(properties.getProperty("customer.password.empty"));
     }
 
     @Test
@@ -93,7 +100,7 @@ public class TestSignInPage extends FluentTest {
         champs = Arrays.array("adoucheali@yahoo.fr", "adouche");
         String min =  Integer.toString(Customer.PASSWORD_SIZE_MIN);
         String max =  Integer.toString(Customer.PASSWORD_SIZE_MAX);
-        String message = Customer.ERREUR_PASSWORD_OUT_OF_RANGE.replace("{min}", min).replace("{max}", max);
+        String message = properties.getProperty("customer.password.outOfRange").replace("{min}", min).replace("{max}", max);
         
         signInPage.fillAndSubmitSignInForm(champs);
 
@@ -115,24 +122,17 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfErrors(1);
-        checkErrorMessage(Customer.ERREUR_EMAIL_EMPTY);
+        checkErrorMessage(properties.getProperty("customer.email.empty"));
     }
     
     @Test
     public void should_return_email_or_password_wrong() {
-        champs = Arrays.array("adouche@yahoo.fr", "adouchealii");
+        champs = Arrays.array("adouche@yahoo.fr", "adouchealii");//wrong password
         
         signInPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfErrors(1);
-        checkErrorMessage(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
-        
-        champs[1] = "adouchealii";
-
-        signInPage.fillAndSubmitSignInForm(champs);
-        
-        checkNumberOfErrors(1);
-        checkErrorMessage(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
+        checkErrorMessage(Customer.ERROR_EMAIL_OR_PASSWORD_WRONG);
     }
 
     @Test
@@ -142,7 +142,7 @@ public class TestSignInPage extends FluentTest {
         signInPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfErrors(1);
-        checkErrorMessage(Customer.ERREUR_EMAIL_INVALID);
+        checkErrorMessage(properties.getProperty("customer.email.invalid"));
     } 
 //==============================================================================
 

@@ -14,7 +14,7 @@ import lombok.Data;
 @Named
 @SessionScoped
 public class CustomerHolder implements Serializable {
-    
+
     @Inject
     Customer currentCustomer;
     

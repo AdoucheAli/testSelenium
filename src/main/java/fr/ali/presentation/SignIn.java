@@ -47,7 +47,7 @@ public class SignIn implements Serializable {
         if (isFind) {
             view = checkOriginalViewId();
         } else {
-            FacesMessage msg = new FacesMessage(Customer.ERREUR_EMAIL_OR_PASSWORD_WRONG);
+            FacesMessage msg = new FacesMessage(Customer.ERROR_EMAIL_OR_PASSWORD_WRONG);
             facesContext.addMessage(null, msg);
         }
         return view;

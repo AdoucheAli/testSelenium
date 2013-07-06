@@ -56,9 +56,7 @@ public class TestSignInSuccessPage extends FluentTest {
         click("#btnLogout");
         await().untilPage(signInPage).isLoaded();
         
-        checkPageTitle(signInPage);
-
-        
+        checkPageTitle(signInPage);   
     }
  //=============================================================================================   
     

@@ -28,7 +28,7 @@ public class SignUp {
     
     @Inject
     FacesContext facesContext;
-    
+
     private boolean isEmailNotUsed = false;
     
     //actionListener
@@ -50,7 +50,7 @@ public class SignUp {
             view.append("?faces-redirect=true");
 
         } else {
-            FacesMessage msg = new FacesMessage(Customer.ERREUR_EMAIL_USED);
+            FacesMessage msg = new FacesMessage(Customer.ERROR_EMAIL_USED);
             facesContext.addMessage(null, msg);
         }
        

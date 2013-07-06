@@ -3,6 +3,8 @@ package fr.ali.selenium;
 import fr.ali.business.entities.Customer;
 import fr.ali.selenium.pages.SignInPage;
 import fr.ali.selenium.pages.SignUpPage;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import static org.fest.assertions.fluentlenium.FluentLeniumAssertions.assertThat;
 import org.fest.assertions.fluentlenium.custom.FluentListAssert;
@@ -13,17 +15,22 @@ import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.domain.FluentList;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 @SharedDriver(type = SharedDriver.SharedType.ONCE)
 public class TestSignUpPage extends FluentTest {
 
-    @Page
-    private SignUpPage signUpPage;
-    @Page
-    private SignInPage signInPage;
-
+    @Page private SignUpPage signUpPage;
+    @Page private SignInPage signInPage;
     private String[] champs = new String[4];
+    private static Properties properties;
+
+    @BeforeClass
+    public static void load() throws IOException {
+        properties = new Properties();
+        properties.load(TestSignInPage.class.getResourceAsStream("/ValidationMessages.properties"));
+    }
 
     @Before
     public void openBrowser() {
@@ -69,7 +76,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorMessage(Customer.ERREUR_PASSWORD_EMPTY);
+        checkErrorMessage(properties.getProperty("customer.password.empty"));
     }
 
     @Test
@@ -77,7 +84,7 @@ public class TestSignUpPage extends FluentTest {
         champs = Arrays.array("adouche", "ali", "adoucheali@yahoo.fr", "aaaaa");
         String min =  Integer.toString(Customer.PASSWORD_SIZE_MIN);
         String max =  Integer.toString(Customer.PASSWORD_SIZE_MAX);
-        String message = Customer.ERREUR_PASSWORD_OUT_OF_RANGE.replace("{min}", min).replace("{max}", max);
+        String message = properties.getProperty("customer.password.outOfRange").replace("{min}", min).replace("{max}", max);
         
         signUpPage.fillAndSubmitSignInForm(champs);
 
@@ -99,7 +106,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorMessage(Customer.ERREUR_EMAIL_EMPTY);
+        checkErrorMessage(properties.getProperty("customer.email.empty"));
     }
 
     @Test
@@ -109,7 +116,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorMessage(Customer.ERREUR_EMAIL_INVALID);
+        checkErrorMessage(properties.getProperty("customer.email.invalid"));
     }
 
     @Test
@@ -120,7 +127,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorMessage(Customer.ERREUR_NOM_EMPTY);
+        checkErrorMessage(properties.getProperty("customer.lastName.empty"));
     }
 
     @Test
@@ -130,7 +137,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
 
         checkNumberOfMessages(1);
-        checkErrorMessage(Customer.ERREUR_PRENOM_EMPTY);
+        checkErrorMessage(properties.getProperty("customer.firstName.empty"));
     }
    
     @Test
@@ -140,7 +147,7 @@ public class TestSignUpPage extends FluentTest {
         signUpPage.fillAndSubmitSignInForm(champs);
         
         checkNumberOfMessages(1);
-        checkErrorMessage(Customer.ERREUR_EMAIL_USED);
+        checkErrorMessage(Customer.ERROR_EMAIL_USED);
         
     }
     

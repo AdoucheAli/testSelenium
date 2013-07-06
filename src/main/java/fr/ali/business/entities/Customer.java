@@ -28,14 +28,8 @@ public class Customer implements Serializable {
     public final static int PASSWORD_SIZE_MIN = 10;
     public final static int PASSWORD_SIZE_MAX = 20;
     
-    public final static String ERREUR_NOM_EMPTY = "veuillez rentrer un nom";
-    public final static String ERREUR_PRENOM_EMPTY = "veuillez rentrer un prenom";
-    public final static String ERREUR_PASSWORD_EMPTY = "veuillez rentrer un password";
-    public final static String ERREUR_PASSWORD_OUT_OF_RANGE = "veuillez rentrer un password compris entre {min} et {max} caractères";
-    public final static String ERREUR_EMAIL_EMPTY = "veuillez rentrer un email";
-    public final static String ERREUR_EMAIL_INVALID = "veuillez rentrer un email valide";
-    public final static String ERREUR_EMAIL_OR_PASSWORD_WRONG = "Vérifiez votre email ou/et votre pasword";
-    public final static String ERREUR_EMAIL_USED = "Cet email est déjà utilisé";
+    public final static String ERROR_EMAIL_OR_PASSWORD_WRONG = "Vérifiez votre email ou/et votre pasword";
+    public final static String ERROR_EMAIL_USED = "Cet email est déjà utilisé";
 
     public final static String PREFIX = "fr.ali.business.entities.";
     public final static String BY_EMAIL = PREFIX + "Customer.findByEmail"; 
@@ -44,24 +38,24 @@ public class Customer implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull(message = ERREUR_NOM_EMPTY)
-    @NonNull
-    private String nom;
+    @NotNull(message = "{customer.lastName.empty}" )
+    @NonNull //Lombok annotation
+    private String lastName;
     
-    @NotNull(message = ERREUR_PRENOM_EMPTY)
+    @NotNull(message = "{customer.firstName.empty}")
     @NonNull
-    private String prenom;
+    private String firstName;
     
-    @NotNull(message = ERREUR_PASSWORD_EMPTY)
+    @NotNull(message = "{customer.password.empty}")
     @Size( min = PASSWORD_SIZE_MIN, 
            max = PASSWORD_SIZE_MAX, 
-           message = ERREUR_PASSWORD_OUT_OF_RANGE
+           message = "{customer.password.outOfRange}"
     )
     @NonNull
     private String password;
     
-    @NotNull(message = ERREUR_EMAIL_EMPTY)
-    @Email(message = ERREUR_EMAIL_INVALID)
+    @NotNull(message = "{customer.email.empty}")
+    @Email(message = "{customer.email.invalid}")
     @NonNull
     private String email;
 }

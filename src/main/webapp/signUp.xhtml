@@ -17,9 +17,9 @@
             <div class = "wrapForm">
                 <h:form prependId="false" id="formSignUp">
                     <h:outputLabel class = "outputLabel" for = "inputNomSignUp">Nom</h:outputLabel>
-                    <h:inputText id = "inputNomSignUp" value = "#{signUp.customer.nom}"></h:inputText>
+                    <h:inputText id = "inputNomSignUp" value = "#{signUp.customer.lastName}"></h:inputText>
                     <h:outputLabel class = "outputLabel" for = "inputPrenomSignUp">Prenom</h:outputLabel>
-                    <h:inputText id = "inputPrenomSignUp" value = "#{signUp.customer.prenom}"></h:inputText>
+                    <h:inputText id = "inputPrenomSignUp" value = "#{signUp.customer.firstName}"></h:inputText>
                     <h:outputLabel class = "outputLabel" for = "inputEmailSignUp">Email</h:outputLabel>
                     <h:inputText id = "inputEmailSignUp" value = "#{signUp.customer.email}"></h:inputText>
                     <h:outputLabel class = "outputLabel" for = "inputPasswordSignUp">Password</h:outputLabel>
